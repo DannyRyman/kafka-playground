@@ -1,0 +1,5 @@
+// get a list of topics
+curl "http://localhost:8082/topics"
+
+// get the topic "_schemas"
+curl "http://localhost:8082/topics/_schemas"

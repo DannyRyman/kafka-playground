@@ -1,0 +1,15 @@
+{
+  "name": "kafka-avro-test-harness",
+  "version": "1.0.0",
+  "description": "Test harness for the kafka-avro package ",
+  "main": "index.js",
+  "author": "Dan Ryan",
+  "license": "MIT",
+  "scripts": {
+    "start-producer": "node ./producer/index.js"
+  },
+  "dependencies": {
+    "kafka-avro": "^0.7.0",
+    "standard": "^10.0.2"
+  }
+}
