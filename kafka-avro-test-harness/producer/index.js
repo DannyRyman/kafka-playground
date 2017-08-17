@@ -40,7 +40,11 @@ async function run () {
       message
     }
 
-    producer.produce(topic, -1, body, Guid.create().toString())
+    try {
+      producer.produce(topic, -1, body, Guid.create().toString())
+    } catch (e) {
+      console.log('error sending message', e)
+    }
   })
 }
 
