@@ -9,7 +9,9 @@
     "start-producer": "node ./producer/index.js"
   },
   "dependencies": {
+    "guid": "^0.0.12",
     "kafka-avro": "^0.7.0",
+    "prompt": "^1.0.0",
     "standard": "^10.0.2"
   }
 }

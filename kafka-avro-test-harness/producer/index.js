@@ -1,4 +1,6 @@
 const KafkaAvro = require('kafka-avro')
+const Guid = require('guid')
+var prompt = require('prompt')
 
 var kafkaAvro = new KafkaAvro({
   kafkaBroker: 'http://localhost:9092',
@@ -31,12 +33,26 @@ async function run () {
     'request.required.acks': 1
   })
 
-  var message = {
-    name: 'Thanasis',
-    long: 540
-  }
+  continuePromptingForUserInput((message) => {
+    console.log(`sending message: ${message}`)
 
-  producer.produce(topic, -1, message, 'key')
+    var body = {
+      message
+    }
+
+    producer.produce(topic, -1, body, Guid.create().toString())
+  })
+}
+
+function continuePromptingForUserInput (cb) {
+  prompt.get(['message'], function (err, result) {
+    cb(result.message)
+    if (result.message === 'exit') {
+      console.log('exiting')
+    } else {
+      continuePromptingForUserInput(cb)
+    }
+  })
 }
 
 run()

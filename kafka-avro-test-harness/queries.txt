@@ -1,5 +1,22 @@
 // get a list of topics
 curl "http://localhost:8082/topics"
 
+curl "http://localhost:8082/topics/sample_topic"
+
+curl "http://localhost:8082/topics/sample_topic/partitions"
+
+curl "http://localhost:8082/topics/sample_topic/partitions/0/messages?count=100"
+
 // get the topic "_schemas"
 curl "http://localhost:8082/topics/_schemas"
+
+// Add a schema for sample_topic
+curl -X POST -H "Content-Type: application/vnd.schemaregistry.v1+json" \
+    --data '{"schema": "{\"type\": \"record\", \"name\": \"some_event\", \"fields\": [{\"name\": \"message\", \"type\":\"string\"}]}"}' \
+    http://localhost:8081/subjects/sample_topic-value/versions
+
+curl http://localhost:8081/subjects/sample_topic/versions
+
+curl -X DELETE http://localhost:8081/subjects/sample_topic
+
+curl "http://localhost:8081/subjects"
